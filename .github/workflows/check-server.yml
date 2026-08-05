@@ -1,0 +1,22 @@
+name: Check Valheim Server
+
+on:
+  schedule:
+    - cron: '*/1 * * * *'
+  workflow_dispatch: {}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Interroger le serveur et rapporter l'etat
+        env:
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          SERVER_PORT: ${{ secrets.SERVER_PORT }}
+          WORKER_URL: ${{ secrets.WORKER_URL }}
+          SERVER_STATUS_TOKEN: ${{ secrets.SERVER_STATUS_TOKEN }}
+        run: node check-server.js
