@@ -68,6 +68,13 @@ function a2sInfoQuery(host, port, timeoutMs) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ token: STATUS_TOKEN, online })
   });
-  const body = await res.json();
-  console.log('Rapport envoye :', body);
+
+  const text = await res.text();
+  if (!res.ok || !(res.headers.get('content-type') || '').includes('application/json')) {
+    console.error(`Reponse inattendue du Worker (statut ${res.status}, content-type "${res.headers.get('content-type')}") :`);
+    console.error(text.slice(0, 500));
+    process.exit(1);
+  }
+
+  console.log('Rapport envoye :', JSON.parse(text));
 })();
