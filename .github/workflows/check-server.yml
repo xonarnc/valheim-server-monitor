@@ -11,10 +11,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Interroger le serveur et rapporter l'etat
+      - name: Interroger Xonarnc et rapporter l'etat
         env:
+          SERVER_ID: xonarnc
           SERVER_HOST: ${{ secrets.SERVER_HOST }}
           SERVER_PORT: ${{ secrets.SERVER_PORT }}
+          WORKER_URL: ${{ secrets.WORKER_URL }}
+          SERVER_STATUS_TOKEN: ${{ secrets.SERVER_STATUS_TOKEN }}
+        run: node check-server.js
+      - name: Interroger XonarncTest et rapporter l'etat
+        env:
+          SERVER_ID: xonarnctest
+          SERVER_HOST: ${{ secrets.SERVER2_HOST }}
+          SERVER_PORT: ${{ secrets.SERVER2_PORT }}
           WORKER_URL: ${{ secrets.WORKER_URL }}
           SERVER_STATUS_TOKEN: ${{ secrets.SERVER_STATUS_TOKEN }}
         run: node check-server.js
