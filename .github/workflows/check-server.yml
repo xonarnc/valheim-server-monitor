@@ -13,14 +13,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Interroger Xonarnc et rapporter l'etat
-        env:
-          SERVER_ID: xonarnc
-          SERVER_HOST: ${{ secrets.SERVER_HOST }}
-          SERVER_PORT: ${{ secrets.SERVER_PORT }}
-          WORKER_URL: ${{ secrets.WORKER_URL }}
-          SERVER_STATUS_TOKEN: ${{ secrets.SERVER_STATUS_TOKEN }}
-        run: node check-server.js
       - name: Interroger Deep North et rapporter l'etat
         env:
           SERVER_ID: deepnorth

@@ -4,7 +4,7 @@ const dgram = require('dgram');
 const HOST = process.env.SERVER_HOST;
 const PORT = Number(process.env.SERVER_PORT || 27015);
 // Identifiant du serveur rapporte au Worker (permet de suivre plusieurs
-// serveurs distincts — Xonarnc, XonarncTest — au lieu d'un seul statut
+// serveurs distincts (aujourd'hui : deepnorth) au lieu d'un seul statut
 // global). Reste optionnel pour ne pas casser un appel existant qui ne le
 // fournirait pas.
 const SERVER_ID = process.env.SERVER_ID || 'default';
